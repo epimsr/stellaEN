@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英文代名詞：主格・所有格・受格</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #1e293b;
+  padding: 28px 16px 60px;
+  line-height: 1.7;
+}
+.wrap { max-width: 960px; margin: 0 auto; }
+
+h1 {
+  text-align: center;
+  font-size: 1.9rem;
+  color: #1e3a8a;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 22px;
+}
+
+/* ===== 語速列 ===== */
+.speed-bar {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; background: white; border-radius: 999px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.10);
+  padding: 10px 22px; max-width: 480px; margin: 0 auto 28px;
+  flex-wrap: wrap;
+}
+.speed-label { font-size: 0.85rem; font-weight: 800; color: #475569; white-space: nowrap; }
+.speed-btn {
+  font-size: 0.85rem; font-weight: 800;
+  border: 2px solid #e2e8f0; border-radius: 999px;
+  padding: 5px 16px; min-height: 42px;
+  background: #f8fafc; color: #64748b;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.speed-btn:hover  { border-color: #93c5fd; background: #eff6ff; color: #1d4ed8; }
+.speed-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+
+/* ===== 規則卡 ===== */
+.rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 34px; }
+.rule {
+  background: white; border-radius: 16px; padding: 18px 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07); border-top: 5px solid;
+}
+.rule.subj { border-color: #dc2626; }
+.rule.poss { border-color: #d97706; }
+.rule.obj  { border-color: #7c3aed; }
+.rule.pp   { border-color: #0d9488; }
+.rule h3 { font-size: 1.05rem; margin-bottom: 2px; }
+.rule.subj h3 { color: #dc2626; }
+.rule.poss h3 { color: #b45309; }
+.rule.obj  h3 { color: #6d28d9; }
+.rule.pp   h3 { color: #0f766e; }
+.rule .en { font-size: 0.8rem; color: #94a3b8; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 8px; }
+.rule p { font-size: 0.9rem; color: #475569; }
+.rule .demo { margin-top: 8px; font-size: 0.88rem; color: #334155; background: #f8fafc; border-radius: 8px; padding: 6px 10px; }
+.rule .demo b { color: #dc2626; }
+
+/* ===== 表格 ===== */
+.table-box { background: white; border-radius: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.07); padding: 6px; margin-bottom: 34px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 460px; }
+th, td { padding: 10px 8px; text-align: center; font-size: 0.95rem; }
+thead th { background: #1e3a8a; color: white; font-size: 0.85rem; }
+thead th:first-child { border-radius: 12px 0 0 0; }
+thead th:last-child  { border-radius: 0 12px 0 0; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody td { border-bottom: 1px solid #e2e8f0; font-weight: 700; }
+.c-subj { color: #dc2626; }
+.c-poss { color: #b45309; }
+.c-obj  { color: #6d28d9; }
+.c-pp   { color: #0f766e; }
+
+h2.sec {
+  font-size: 1.25rem; color: #1e3a8a; margin-bottom: 14px;
+  padding-left: 12px; border-left: 6px solid #2563eb;
+}
+
+/* ===== 例句組 ===== */
+.group {
+  background: white; border-radius: 16px; padding: 16px 18px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07); margin-bottom: 16px;
+}
+.group-title {
+  font-size: 1.05rem; font-weight: 900; color: #1e3a8a;
+  margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px dashed #e2e8f0;
+}
+.group-title span.s { color: #dc2626; }
+.group-title span.p { color: #b45309; }
+.group-title span.o { color: #6d28d9; }
+.group-title span.pp { color: #0f766e; }
+
+.line { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; }
+.line + .line { border-top: 1px solid #f1f5f9; }
+.sent-btn {
+  flex: 0 0 auto; min-height: 42px; min-width: 42px;
+  border: 2px solid #bfdbfe; background: #eff6ff; color: #1d4ed8;
+  border-radius: 10px; font-size: 1rem; cursor: pointer; transition: all 0.15s;
+}
+.sent-btn:hover { background: #dbeafe; }
+.sent-btn.playing { background: #2563eb; color: white; border-color: #2563eb; }
+.line-body { flex: 1; }
+.sent { font-size: 1.12rem; font-weight: 600; color: #0f172a; font-family: Georgia, serif; }
+.sent .hl { font-weight: 900; }
+.hl.s { color: #dc2626; }
+.hl.p { color: #b45309; }
+.hl.o { color: #6d28d9; }
+.hl.pp { color: #0f766e; }
+.tag {
+  display: inline-block; margin-top: 4px;
+  font-size: 0.78rem; font-weight: 800;
+  border-radius: 999px; padding: 2px 12px;
+}
+.tag.s { background: #fee2e2; color: #b91c1c; }
+.tag.p { background: #fef3c7; color: #92400e; }
+.tag.o { background: #ede9fe; color: #5b21b6; }
+.tag.pp { background: #ccfbf1; color: #115e59; }
+.zh { font-size: 0.85rem; color: #94a3b8; margin-top: 3px; }
+.none-line { color: #94a3b8; font-size: 0.88rem; font-weight: 700; }
+
+/* ===== 提醒 ===== */
+.note {
+  background: #fffbeb; border: 2px solid #fde68a; border-radius: 14px;
+  padding: 16px 18px; margin-top: 28px;
+}
+.note h3 { color: #b45309; font-size: 1rem; margin-bottom: 8px; }
+.note li { margin-left: 18px; font-size: 0.9rem; color: #78350f; margin-bottom: 5px; }
+
+/* ===== 填空練習 ===== */
+.quiz-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.quiz-info { font-size: 0.88rem; color: #64748b; }
+.quiz-score {
+  background: #1e3a8a; color: white; font-weight: 800; font-size: 0.88rem;
+  border-radius: 999px; padding: 6px 18px; white-space: nowrap;
+}
+.q {
+  background: white; border-radius: 14px; padding: 14px 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07); margin-bottom: 12px;
+  border-left: 6px solid #cbd5e1;
+}
+.q.ok    { border-left-color: #16a34a; background: #f0fdf4; }
+.q.wrong { border-left-color: #dc2626; background: #fef2f2; }
+.q-top { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.q-num { font-weight: 900; color: #94a3b8; font-size: 0.85rem; flex: 0 0 auto; }
+.q-sent { font-family: Georgia, serif; font-size: 1.1rem; color: #0f172a; }
+.q-hint {
+  font-size: 0.78rem; font-weight: 800; color: #b45309;
+  background: #fef3c7; border-radius: 999px; padding: 2px 10px; white-space: nowrap;
+}
+.q-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.q-input {
+  flex: 1 1 160px; min-height: 42px;
+  border: 2px solid #cbd5e1; border-radius: 10px;
+  padding: 6px 12px; font-size: 1rem; font-family: Georgia, serif;
+  outline: none; transition: border-color 0.15s;
+}
+.q-input:focus { border-color: #2563eb; }
+.q-input.ok    { border-color: #16a34a; background: #dcfce7; }
+.q-input.wrong { border-color: #dc2626; background: #fee2e2; }
+.q-check {
+  flex: 0 0 auto; min-height: 42px; padding: 6px 16px;
+  border: 2px solid #bfdbfe; background: #eff6ff; color: #1d4ed8;
+  border-radius: 10px; font-weight: 800; font-size: 0.88rem; cursor: pointer;
+}
+.q-check:hover { background: #dbeafe; }
+.fb { margin-top: 9px; font-size: 0.92rem; display: none; }
+.fb.show { display: block; }
+.fb-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.fb-txt { font-weight: 800; }
+.fb-txt.ok { color: #15803d; }
+.fb-txt.wrong { color: #b91c1c; }
+.fb-full { font-family: Georgia, serif; color: #0f172a; font-size: 1.02rem; }
+.fb-full b { color: #dc2626; }
+.fb-tag { font-size: 0.78rem; color: #64748b; margin-top: 3px; }
+.replay-btn {
+  min-height: 42px; min-width: 42px;
+  border: 2px solid #bfdbfe; background: #eff6ff; color: #1d4ed8;
+  border-radius: 10px; font-size: 1rem; cursor: pointer;
+}
+.replay-btn:hover { background: #dbeafe; }
+.quiz-actions { display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.act-btn {
+  min-height: 46px; padding: 8px 26px; border-radius: 999px;
+  border: 2px solid #cbd5e1; background: white; color: #475569;
+  font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: all 0.15s;
+}
+.act-btn:hover { border-color: #93c5fd; color: #1d4ed8; }
+.act-btn.primary { background: #2563eb; color: white; border-color: #2563eb; }
+.act-btn.primary:hover { background: #1d4ed8; color: white; }
+
+/* ===== RWD ===== */
+@media (max-width: 768px) {
+  body { padding: 20px 12px 50px; }
+  h1 { font-size: 1.55rem; }
+  .rules { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .sent { font-size: 1.05rem; }
+}
+@media (max-width: 520px) {
+  .rules { grid-template-columns: 1fr; }
+  h1 { font-size: 1.35rem; }
+  .subtitle { font-size: 0.85rem; }
+  .speed-bar { padding: 8px 14px; gap: 7px; }
+  .speed-btn { padding: 5px 12px; font-size: 0.8rem; }
+  .group { padding: 14px 13px; }
+  .q-input { flex: 1 1 100%; }
+  .q-check { flex: 1 1 100%; }
+  .q-sent { font-size: 1.02rem; }
+  th, td { padding: 8px 5px; font-size: 0.85rem; }
+  .sent { font-size: 1rem; }
+}
+@media (max-width: 360px) {
+  h1 { font-size: 1.2rem; }
+  .speed-label { display: none; }
+  .sent { font-size: 0.95rem; }
+  .tag { font-size: 0.72rem; padding: 2px 9px; }
+  .q-sent { font-size: 0.95rem; }
+  .q-hint { font-size: 0.72rem; }
+  .fb-full { font-size: 0.95rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>英文代名詞三兄弟</h1>
+  <p class="subtitle">主格 → 所有格 → 受格 → 所有格代名詞<br>Subject → Possessive → Object → Possessive Pronoun</p>
+
+  <div class="speed-bar">
+    <span class="speed-label">🔊 語速：</span>
+    <button class="speed-btn" onclick="setSpeed(0.25)" data-rate="0.25">慢 🐢</button>
+    <button class="speed-btn active" onclick="setSpeed(0.75)" data-rate="0.75">正常 🚶</button>
+    <button class="speed-btn" onclick="setSpeed(1.25)" data-rate="1.25">快 🐇</button>
+  </div>
+
+  <!-- 規則 -->
+  <div class="rules">
+    <div class="rule subj">
+      <h3>① 主格</h3>
+      <div class="en">SUBJECT PRONOUN</div>
+      <p>當「主詞」，放在<b>句子最前面、動詞之前</b>，是做動作的人。</p>
+      <div class="demo"><b>He</b> plays basketball.</div>
+    </div>
+    <div class="rule poss">
+      <h3>② 所有格</h3>
+      <div class="en">POSSESSIVE ADJECTIVE</div>
+      <p>表示「誰的」，<b>後面一定要接名詞</b>，不能單獨使用。</p>
+      <div class="demo"><b>His</b> shoes are dirty.</div>
+    </div>
+    <div class="rule obj">
+      <h3>③ 受格</h3>
+      <div class="en">OBJECT PRONOUN</div>
+      <p>當「受詞」，放在<b>動詞或介系詞後面</b>，是被動作的人。</p>
+      <div class="demo">I saw <b>him</b> at the park.</div>
+    </div>
+    <div class="rule pp">
+      <h3>④ 所有格代名詞</h3>
+      <div class="en">POSSESSIVE PRONOUN</div>
+      <p>＝所有格＋名詞，<b>後面不接名詞、單獨使用</b>。</p>
+      <div class="demo">The blue pen is <b>his</b>.</div>
+    </div>
+  </div>
+
+  <!-- 表格 -->
+  <div class="table-box">
+    <table>
+      <thead>
+        <tr>
+          <th>主格<br>Subject</th>
+          <th>所有格<br>Possessive</th>
+          <th>受格<br>Object</th>
+          <th>所有格代名詞<br>Possessive Pron.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="c-subj">I</td><td class="c-poss">my</td><td class="c-obj">me</td><td class="c-pp">mine</td></tr>
+        <tr><td class="c-subj">you</td><td class="c-poss">your</td><td class="c-obj">you</td><td class="c-pp">yours</td></tr>
+        <tr><td class="c-subj">he</td><td class="c-poss">his</td><td class="c-obj">him</td><td class="c-pp">his</td></tr>
+        <tr><td class="c-subj">she</td><td class="c-poss">her</td><td class="c-obj">her</td><td class="c-pp">hers</td></tr>
+        <tr><td class="c-subj">it</td><td class="c-poss">its</td><td class="c-obj">it</td><td class="c-pp">—</td></tr>
+        <tr><td class="c-subj">we</td><td class="c-poss">our</td><td class="c-obj">us</td><td class="c-pp">ours</td></tr>
+        <tr><td class="c-subj">they</td><td class="c-poss">their</td><td class="c-obj">them</td><td class="c-pp">theirs</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">例句對照</h2>
+  <div id="examples"></div>
+
+  <div class="note">
+    <h3>⚠️ 最容易搞混的地方</h3>
+    <ul>
+      <li><b>her</b> 同時是「所有格」和「受格」：<b>her</b> book（她的書）／ I like <b>her</b>.（我喜歡她）</li>
+      <li><b>his</b> 所有格和所有格代名詞同形：<b>his</b> pen ／ The pen is <b>his</b>.</li>
+      <li><b>its</b>（它的）≠ <b>it's</b>（it is），撇號差很多！</li>
+      <li>所有格後面沒有名詞就是錯的：✗ This is my. → ✓ This is <b>mine</b>.</li>
+      <li>所有格代名詞後面不可再接名詞：✗ mine bike → ✓ <b>my</b> bike ／ ✓ The bike is <b>mine</b>.</li>
+      <li><b>its</b> 沒有所有格代名詞形式，不要寫成 ✗ its'。</li>
+    </ul>
+  </div>
+  <h2 class="sec" style="margin-top:40px;">填空練習</h2>
+  <div class="quiz-head">
+    <div class="quiz-info">依照提示，填入正確的代名詞（大小寫皆可）</div>
+    <div class="quiz-score" id="score">已答對 0 / 26</div>
+  </div>
+  <div id="quiz"></div>
+  <div class="quiz-actions">
+    <button class="act-btn primary" onclick="checkAll()">✅ 全部批改</button>
+    <button class="act-btn" onclick="resetQuiz()">🔄 重新作答</button>
+  </div>
+
+</div>
+
+<script>
+/* ---- 語音 ---- */
+let _voices = [];
+let currentRate = 0.75;
+
+function loadVoices() { _voices = window.speechSynthesis.getVoices(); }
+loadVoices();
+window.speechSynthesis.onvoiceschanged = loadVoices;
+
+function getBestVoice() {
+  const preferred = [
+    v => v.name === 'Google US English',
+    v => v.name.includes('Samantha'),
+    v => v.lang === 'en-US' && v.localService,
+    v => v.lang === 'en-US',
+    v => v.lang.startsWith('en'),
+  ];
+  for (const fn of preferred) {
+    const found = _voices.find(fn);
+    if (found) return found;
+  }
+  return null;
+}
+
+function speak(text) {
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = currentRate;
+  utter.pitch = 1.0;
+  utter.volume = 1.0;
+  const voice = getBestVoice();
+  if (voice) utter.voice = voice;
+  setTimeout(() => window.speechSynthesis.speak(utter), 50);
+}
+
+function setSpeed(rate) {
+  currentRate = rate;
+  document.querySelectorAll('.speed-btn').forEach(btn => {
+    btn.classList.toggle('active', Math.abs(parseFloat(btn.dataset.rate) - rate) < 0.001);
+  });
+}
+
+function playSent(btn, sentence) {
+  speak(sentence);
+  btn.classList.add('playing');
+  const dur = Math.max(1200, sentence.split(' ').length * 420);
+  setTimeout(() => btn.classList.remove('playing'), dur);
+}
+
+function escapeAttr(s) {
+  return s.replace(/&/g, '&amp;').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+}
+
+/* ---- 例句資料 ---- */
+const DATA = [
+  { set: ['I', 'my', 'me', 'mine'], items: [
+    { pre: '', word: 'I', post: ' have a new bike.', type: 's', zh: '我有一台新腳踏車。' },
+    { pre: '', word: 'My', post: ' bike is red.', type: 'p', zh: '我的腳踏車是紅色的。' },
+    { pre: 'My mom bought it for ', word: 'me', post: '.', type: 'o', zh: '媽媽買給我的。' },
+    { pre: 'The red one is ', word: 'mine', post: '.', type: 'pp', zh: '紅色那台是我的。' },
+  ]},
+  { set: ['You', 'your', 'you', 'yours'], items: [
+    { pre: '', word: 'You', post: ' look happy today.', type: 's', zh: '你今天看起來很開心。' },
+    { pre: '', word: 'Your', post: ' smile is nice.', type: 'p', zh: '你的笑容很好看。' },
+    { pre: 'I want to talk to ', word: 'you', post: '.', type: 'o', zh: '我想跟你說話。' },
+    { pre: 'This seat is ', word: 'yours', post: '.', type: 'pp', zh: '這個位子是你的。' },
+  ]},
+  { set: ['He', 'his', 'him', 'his'], items: [
+    { pre: '', word: 'He', post: ' plays basketball.', type: 's', zh: '他打籃球。' },
+    { pre: '', word: 'His', post: ' shoes are dirty.', type: 'p', zh: '他的鞋子很髒。' },
+    { pre: 'I saw ', word: 'him', post: ' at the park.', type: 'o', zh: '我在公園看到他。' },
+    { pre: 'The blue pen is ', word: 'his', post: '.', type: 'pp', zh: '那支藍筆是他的。' },
+  ]},
+  { set: ['She', 'her', 'her', 'hers'], items: [
+    { pre: '', word: 'She', post: ' sings very well.', type: 's', zh: '她唱歌很好聽。' },
+    { pre: '', word: 'Her', post: ' voice is beautiful.', type: 'p', zh: '她的聲音很美。' },
+    { pre: 'Everyone likes ', word: 'her', post: '.', type: 'o', zh: '大家都喜歡她。' },
+    { pre: 'That umbrella is ', word: 'hers', post: '.', type: 'pp', zh: '那把雨傘是她的。' },
+  ]},
+  { set: ['It', 'its', 'it', '—'], items: [
+    { pre: '', word: 'It', post: ' is a big dog.', type: 's', zh: '牠是一隻大狗。' },
+    { pre: '', word: 'Its', post: ' tail is long.', type: 'p', zh: '牠的尾巴很長。' },
+    { pre: 'I feed ', word: 'it', post: ' every day.', type: 'o', zh: '我每天餵牠。' },
+    { none: true, text: 'it 沒有所有格代名詞形式' },
+  ]},
+  { set: ['We', 'our', 'us', 'ours'], items: [
+    { pre: '', word: 'We', post: ' are classmates.', type: 's', zh: '我們是同學。' },
+    { pre: '', word: 'Our', post: ' teacher is kind.', type: 'p', zh: '我們的老師很親切。' },
+    { pre: 'She teaches ', word: 'us', post: ' English.', type: 'o', zh: '她教我們英文。' },
+    { pre: 'The big classroom is ', word: 'ours', post: '.', type: 'pp', zh: '那間大教室是我們的。' },
+  ]},
+  { set: ['They', 'their', 'them', 'theirs'], items: [
+    { pre: '', word: 'They', post: ' live next door.', type: 's', zh: '他們住隔壁。' },
+    { pre: '', word: 'Their', post: ' house is white.', type: 'p', zh: '他們的房子是白色的。' },
+    { pre: 'I often visit ', word: 'them', post: '.', type: 'o', zh: '我常去拜訪他們。' },
+    { pre: 'The white house is ', word: 'theirs', post: '.', type: 'pp', zh: '那棟白房子是他們的。' },
+  ]},
+];
+
+const LABEL = {
+  s: '主格 Subject',
+  p: '所有格 Possessive',
+  o: '受格 Object',
+  pp: '所有格代名詞 Possessive Pronoun',
+};
+
+const CLS = { s: 's', p: 'p', o: 'o', pp: 'pp' };
+
+function render() {
+  const box = document.getElementById('examples');
+  box.innerHTML = DATA.map(g => {
+    const title = `<div class="group-title">
+        <span class="s">${g.set[0]}</span> / <span class="p">${g.set[1]}</span> / <span class="o">${g.set[2]}</span> / <span class="pp">${g.set[3]}</span>
+      </div>`;
+    const lines = g.items.map(it => {
+      if (it.none) return `<div class="line none-line">✗ ${it.text}</div>`;
+      const full = it.pre + it.word + it.post;
+      return `<div class="line">
+        <button class="sent-btn" onclick="playSent(this, '${escapeAttr(full)}')">🔊</button>
+        <div class="line-body">
+          <div class="sent">${it.pre}<span class="hl ${CLS[it.type]}">${it.word}</span>${it.post}</div>
+          <span class="tag ${CLS[it.type]}">${LABEL[it.type]}</span>
+          <div class="zh">${it.zh}</div>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="group">${title}${lines}</div>`;
+  }).join('');
+}
+render();
+
+/* ---- 填空題 ---- */
+function speakFullAnswer(sentence) { speak(sentence); }
+
+const QUIZ = [
+  { pre: '', post: ' am a student.', ans: 'I', hint: '我', type: 's', full: 'I am a student.', zh: '我是學生。' },
+  { pre: '', post: ' name is Amy.', ans: 'My', hint: '我的', type: 'p', full: 'My name is Amy.', zh: '我的名字是 Amy。' },
+  { pre: 'My mom loves ', post: ' very much.', ans: 'me', hint: '我', type: 'o', full: 'My mom loves me very much.', zh: '媽媽很愛我。' },
+  { pre: 'This blue book is ', post: '.', ans: 'mine', hint: '我的（單獨用）', type: 'pp', full: 'This blue book is mine.', zh: '這本藍色的書是我的。' },
+
+  { pre: '', post: ' are very kind.', ans: 'You', hint: '你', type: 's', full: 'You are very kind.', zh: '你很親切。' },
+  { pre: '', post: ' hair is short.', ans: 'Your', hint: '你的', type: 'p', full: 'Your hair is short.', zh: '你的頭髮很短。' },
+  { pre: 'I will call ', post: ' tonight.', ans: 'you', hint: '你', type: 'o', full: 'I will call you tonight.', zh: '我今晚會打給你。' },
+  { pre: 'Is this umbrella ', post: '?', ans: 'yours', hint: '你的（單獨用）', type: 'pp', full: 'Is this umbrella yours?', zh: '這把傘是你的嗎？' },
+
+  { pre: '', post: ' is my brother.', ans: 'He', hint: '他', type: 's', full: 'He is my brother.', zh: '他是我哥哥。' },
+  { pre: '', post: ' bag is very heavy.', ans: 'His', hint: '他的', type: 'p', full: 'His bag is very heavy.', zh: '他的書包很重。' },
+  { pre: 'I play soccer with ', post: '.', ans: 'him', hint: '他', type: 'o', full: 'I play soccer with him.', zh: '我跟他一起踢足球。' },
+  { pre: 'The red cap is ', post: '.', ans: 'his', hint: '他的（單獨用）', type: 'pp', full: 'The red cap is his.', zh: '那頂紅帽子是他的。' },
+
+  { pre: '', post: ' teaches us math.', ans: 'She', hint: '她', type: 's', full: 'She teaches us math.', zh: '她教我們數學。' },
+  { pre: '', post: ' eyes are big.', ans: 'Her', hint: '她的', type: 'p', full: 'Her eyes are big.', zh: '她的眼睛很大。' },
+  { pre: 'All the students like ', post: '.', ans: 'her', hint: '她', type: 'o', full: 'All the students like her.', zh: '所有學生都喜歡她。' },
+  { pre: 'That pink bike is ', post: '.', ans: 'hers', hint: '她的（單獨用）', type: 'pp', full: 'That pink bike is hers.', zh: '那台粉紅腳踏車是她的。' },
+
+  { pre: '', post: ' is a nice cat.', ans: 'It', hint: '牠', type: 's', full: 'It is a nice cat.', zh: '牠是一隻可愛的貓。' },
+  { pre: '', post: ' fur is very soft.', ans: 'Its', hint: '牠的', type: 'p', full: 'Its fur is very soft.', zh: '牠的毛很柔軟。' },
+
+  { pre: '', post: ' are good friends.', ans: 'We', hint: '我們', type: 's', full: 'We are good friends.', zh: '我們是好朋友。' },
+  { pre: '', post: ' school is very old.', ans: 'Our', hint: '我們的', type: 'p', full: 'Our school is very old.', zh: '我們的學校很老舊。' },
+  { pre: 'Please help ', post: ' clean the room.', ans: 'us', hint: '我們', type: 'o', full: 'Please help us clean the room.', zh: '請幫我們打掃教室。' },
+  { pre: 'The soccer ball is ', post: '.', ans: 'ours', hint: '我們的（單獨用）', type: 'pp', full: 'The soccer ball is ours.', zh: '那顆足球是我們的。' },
+
+  { pre: '', post: ' live next door.', ans: 'They', hint: '他們', type: 's', full: 'They live next door.', zh: '他們住隔壁。' },
+  { pre: '', post: ' dog is very cute.', ans: 'Their', hint: '他們的', type: 'p', full: 'Their dog is very cute.', zh: '他們的狗很可愛。' },
+  { pre: 'I often play with ', post: ' after school.', ans: 'them', hint: '他們', type: 'o', full: 'I often play with them after school.', zh: '放學後我常跟他們玩。' },
+  { pre: 'The new car is ', post: '.', ans: 'theirs', hint: '他們的（單獨用）', type: 'pp', full: 'The new car is theirs.', zh: '那台新車是他們的。' },
+];
+
+function renderQuiz() {
+  const box = document.getElementById('quiz');
+  box.innerHTML = QUIZ.map((q, i) => `
+    <div class="q" id="q${i}">
+      <div class="q-top">
+        <span class="q-num">${String(i + 1).padStart(2, '0')}</span>
+        <span class="q-sent">${q.pre}<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>${q.post}</span>
+        <span class="q-hint">提示：${q.hint}</span>
+      </div>
+      <div class="q-row">
+        <input class="q-input" id="i${i}" type="text" autocomplete="off" autocapitalize="off"
+               placeholder="填入代名詞" onkeydown="if(event.key==='Enter')checkOne(${i})">
+        <button class="q-check" onclick="checkOne(${i})">檢查</button>
+      </div>
+      <div class="fb" id="f${i}"></div>
+    </div>`).join('');
+  document.getElementById('score').textContent = `已答對 0 / ${QUIZ.length}`;
+}
+
+const answered = {};
+
+function checkOne(i) {
+  const q = QUIZ[i];
+  const input = document.getElementById('i' + i);
+  const val = input.value.trim();
+  if (!val) { input.focus(); return; }
+  const ok = val.toLowerCase() === q.ans.toLowerCase();
+  answered[i] = ok;
+
+  const card = document.getElementById('q' + i);
+  card.classList.remove('ok', 'wrong');
+  card.classList.add(ok ? 'ok' : 'wrong');
+  input.classList.remove('ok', 'wrong');
+  input.classList.add(ok ? 'ok' : 'wrong');
+
+  const fb = document.getElementById('f' + i);
+  fb.innerHTML = `
+    <div class="fb-line">
+      <span class="fb-txt ${ok ? 'ok' : 'wrong'}">${ok ? '✅ 答對了！' : '❌ 正確答案：' + q.ans}</span>
+      <button class="replay-btn" onclick="speakFullAnswer('${escapeAttr(q.full)}')">🔊</button>
+    </div>
+    <div class="fb-full">${q.pre}<b>${q.ans}</b>${q.post}</div>
+    <div class="fb-tag">${LABEL[q.type]}　${q.zh}</div>`;
+  fb.classList.add('show');
+
+  speakFullAnswer(q.full);
+  updateScore();
+}
+
+function checkAll() {
+  QUIZ.forEach((q, i) => {
+    const input = document.getElementById('i' + i);
+    if (!input.value.trim()) input.value = '';
+    const val = input.value.trim();
+    const ok = val.toLowerCase() === q.ans.toLowerCase();
+    answered[i] = ok;
+
+    const card = document.getElementById('q' + i);
+    card.classList.remove('ok', 'wrong');
+    card.classList.add(ok ? 'ok' : 'wrong');
+    input.classList.remove('ok', 'wrong');
+    input.classList.add(ok ? 'ok' : 'wrong');
+
+    const fb = document.getElementById('f' + i);
+    fb.innerHTML = `
+      <div class="fb-line">
+        <span class="fb-txt ${ok ? 'ok' : 'wrong'}">${ok ? '✅ 答對了！' : '❌ 正確答案：' + q.ans}</span>
+        <button class="replay-btn" onclick="speakFullAnswer('${escapeAttr(q.full)}')">🔊</button>
+      </div>
+      <div class="fb-full">${q.pre}<b>${q.ans}</b>${q.post}</div>
+      <div class="fb-tag">${LABEL[q.type]}　${q.zh}</div>`;
+    fb.classList.add('show');
+  });
+  updateScore();
+  window.speechSynthesis.cancel();
+}
+
+function updateScore() {
+  const right = Object.values(answered).filter(Boolean).length;
+  document.getElementById('score').textContent = `已答對 ${right} / ${QUIZ.length}`;
+}
+
+function resetQuiz() {
+  for (const k in answered) delete answered[k];
+  window.speechSynthesis.cancel();
+  renderQuiz();
+  window.scrollTo({ top: document.getElementById('quiz').offsetTop - 60, behavior: 'smooth' });
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
